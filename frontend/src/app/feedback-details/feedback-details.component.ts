@@ -12,7 +12,7 @@ import { products } from '../shared/models/products';
 })
 export class FeedbackDetailsComponent implements OnInit {
 
-  feedbacks: Feedback[] = [];
+  feedbacks: Feedback[];
   @Input() productId: number;
   createBody: string;
   updateBody: string;
@@ -23,6 +23,7 @@ export class FeedbackDetailsComponent implements OnInit {
   ) {
     this.createBody = '';
     this.updateBody = '';
+    this.feedbacks = [];
   }
 
   ngOnInit(): void {
@@ -33,6 +34,8 @@ export class FeedbackDetailsComponent implements OnInit {
   getFeedbackById(id:number){
     this.feedbackService.getFeedbacks().subscribe((feedbacks) => this.feedbacks = feedbacks.filter(item => item.product === id));
   }
+
+
 
   getFeedbacks(){
     this.route.paramMap.subscribe((params) => {
@@ -47,14 +50,13 @@ export class FeedbackDetailsComponent implements OnInit {
   deleteFeedback(id: number){
     this.feedbacks = this.feedbacks.filter((x) => x.id !== id);
     this.feedbackService.deleteFeedback(id).subscribe(() => {
-      //console.log(id);
+      console.log(id);
     })
   }
 
   create(){
     const feedback = {
       body: this.createBody,
-    /*   product: this.getFeedbacks() */
     };
     this.feedbackService.addFeedback(feedback as Feedback).subscribe((feedback) => {
       this.feedbacks.unshift(feedback);

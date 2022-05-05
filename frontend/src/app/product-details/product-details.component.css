@@ -19,10 +19,6 @@
   border: solid 1px #333;
   background-color: #94a5a773;
 }
-
-.feedback{
-  cursor: pointer;
-}
-.feedback:hover{
-  color: #27bcda;
+button:hover{
+  background-color: rgb(153, 144, 144);
 }
